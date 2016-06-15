@@ -1,0 +1,75 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0.0",
+    "title" : "Customer API",
+    "description" : "Provides basic functionality for customer",
+    "contact" : {
+      "name" : "Chris Riley"
+    }
+  },
+  "paths" : {
+    "/customer" : {
+      "get" : {
+        "summary" : "Get customer information",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "customerId",
+          "description" : "Customer identifier",
+          "required" : true,
+          "type" : "number",
+          "in" : "query"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok",
+            "schema" : {
+              "$ref" : "#/definitions/Customer"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create customer",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "document",
+          "description" : "Customer object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Customer"
+          },
+          "in" : "body"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ok"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Customer" : {
+      "title" : "Customer",
+      "type" : "object",
+      "properties" : {
+        "customerId" : {
+          "type" : "number"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "state" : {
+          "type" : "string"
+        },
+        "zipCode" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
