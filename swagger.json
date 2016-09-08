@@ -1,61 +1,97 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "version" : "1.0.0",
+    "version" : "2.0.0",
     "title" : "Customer",
-    "description" : "Provides basic functionality for customer",
+    "description" : "Provides methods to support the full Customer lifecycle including creation, updating, retrieval and deletion. And it is free!",
+    "termsOfService" : "http://www.wiseclouds.com/CustomerAPITerms.html",
     "contact" : {
-      "name" : "Chris Riley"
+      "name" : "Chris Riley",
+      "url" : "http://www.wiseclouds.com",
+      "email" : "criley@wiseclouds.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0"
     }
   },
   "paths" : {
     "/customer" : {
       "get" : {
-        "summary" : "Get customer information",
-        "produces" : [ "application/json" ],
+        "summary" : "Get Customers",
+        "description" : "Get Customers matching customer identifier",
         "parameters" : [ {
           "name" : "customerId",
+          "in" : "query",
           "description" : "Customer identifier",
           "required" : true,
-          "type" : "number",
-          "in" : "query"
+          "type" : "integer",
+          "format" : "int64"
         } ],
+        "produces" : [ "application/json" ],
         "responses" : {
           "200" : {
-            "description" : "Ok",
+            "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/Customer"
+              "$ref" : "#/definitions/Customers"
             }
+          },
+          "400" : {
+            "description" : "Not Found"
           }
         }
       },
       "post" : {
-        "summary" : "Create customer",
+        "summary" : "Create a Customer",
+        "description" : "Create a Customer Entry",
         "consumes" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "document",
-          "description" : "Customer object",
-          "required" : true,
+          "name" : "request",
+          "in" : "body",
+          "description" : "Customer Object",
           "schema" : {
             "$ref" : "#/definitions/Customer"
-          },
-          "in" : "body"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Created"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update a customer",
+        "description" : "Update a Customer Entry",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "request",
+          "in" : "body",
+          "description" : "Customer Object",
+          "schema" : {
+            "$ref" : "#/definitions/Customer"
+          }
         } ],
         "responses" : {
           "200" : {
-            "description" : "Ok"
+            "description" : "OK"
           }
         }
       }
     }
   },
   "definitions" : {
+    "Customers" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Customer"
+      }
+    },
     "Customer" : {
-      "title" : "Customer",
       "type" : "object",
       "properties" : {
         "customerId" : {
-          "type" : "number"
+          "type" : "integer",
+          "format" : "int64"
         },
         "firstName" : {
           "type" : "string"
@@ -63,11 +99,8 @@
         "lastName" : {
           "type" : "string"
         },
-        "state" : {
-          "type" : "string"
-        },
-        "zipCode" : {
-          "type" : "string"
+        "address" : {
+          "$ref" : "https://api.swaggerhub.com/domains/wiseclouds/wiseclouds/1.0.0#/definitions/Address"
         }
       }
     }
