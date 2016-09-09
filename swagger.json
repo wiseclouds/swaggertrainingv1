@@ -1,9 +1,9 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "version" : "2.0.0",
+    "version" : "1.0.0",
     "title" : "Customer",
-    "description" : "Provides methods to support the full Customer lifecycle including creation, updating, retrieval and deletion. And it is free!",
+    "description" : "Provides methods to support the full Customer lifecycle including creation, updating, retrieval and deletion",
     "termsOfService" : "http://www.wiseclouds.com/CustomerAPITerms.html",
     "contact" : {
       "name" : "Chris Riley",
@@ -16,13 +16,13 @@
     }
   },
   "paths" : {
-    "/customer" : {
+    "/customer/{customerId}" : {
       "get" : {
         "summary" : "Get Customers",
         "description" : "Get Customers matching customer identifier",
         "parameters" : [ {
           "name" : "customerId",
-          "in" : "query",
+          "in" : "path",
           "description" : "Customer identifier",
           "required" : true,
           "type" : "integer",
@@ -40,7 +40,9 @@
             "description" : "Not Found"
           }
         }
-      },
+      }
+    },
+    "/customer" : {
       "post" : {
         "summary" : "Create a Customer",
         "description" : "Create a Customer Entry",
@@ -56,24 +58,6 @@
         "responses" : {
           "201" : {
             "description" : "Created"
-          }
-        }
-      },
-      "put" : {
-        "summary" : "Update a customer",
-        "description" : "Update a Customer Entry",
-        "consumes" : [ "application/json" ],
-        "parameters" : [ {
-          "name" : "request",
-          "in" : "body",
-          "description" : "Customer Object",
-          "schema" : {
-            "$ref" : "#/definitions/Customer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
           }
         }
       }
@@ -99,8 +83,11 @@
         "lastName" : {
           "type" : "string"
         },
-        "address" : {
-          "$ref" : "https://api.swaggerhub.com/domains/wiseclouds/wiseclouds/1.0.0#/definitions/Address"
+        "state" : {
+          "type" : "string"
+        },
+        "zipCode" : {
+          "type" : "string"
         }
       }
     }
