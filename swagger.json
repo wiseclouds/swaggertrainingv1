@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "version" : "1.0.0",
-    "title" : "Customer",
+    "title" : "Customer API",
     "description" : "Provides methods to support the full Customer lifecycle including creation, updating, retrieval and deletion",
     "termsOfService" : "http://www.wiseclouds.com/CustomerAPITerms.html",
     "contact" : {
